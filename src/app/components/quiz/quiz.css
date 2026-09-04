@@ -1,0 +1,144 @@
+/* CONTENITORE PRINCIPALE */
+.quiz-container {
+  width: 90%;
+  max-width: 700px;
+  margin: 50px auto;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* SCHERMATE PRINCIPALI */
+.start-screen,
+.quiz-screen,
+.result-screen {
+  text-align: center;
+  padding: 30px;
+  border: 1px solid whitesmoke;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* TITOLI */
+h1,
+h2 {
+  margin-bottom: 20px;
+}
+
+/* TESTI */
+p {
+  color: gray;
+}
+
+/* CARD DELLA DOMANDA */
+.question-card {
+  margin-top: 10px;
+  padding: 30px;
+}
+
+.question-card h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+/* CONTATORE DOMANDE */
+.quiz-screen > p {
+  color: gray;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+/* CONTENITORE DELLE RISPOSTE */
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 25px;
+}
+
+/* PULSANTI DELLE RISPOSTE */
+.answers button {
+  padding: 14px 18px;
+  font-size: 16px;
+  border: 2px solid gray;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* HOVER SULLE RISPOSTE */
+.answers button:hover {
+  background-color: white;
+  border-color: gray;
+}
+
+/* RISPOSTA CORRETTA */
+.answers button.correct {
+  background-color: #28a745;
+  border-color: #1e7e34;
+  color: white;
+}
+
+/* RISPOSTA SBAGLIATA */
+.answers button.wrong {
+  background-color: #dc3545;
+  border-color: #b02a37;
+  color: white;
+}
+
+/* PULSANTE START E NEXT */
+.start-screen button,
+.next-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* HOVER START */
+.start-screen button:hover {
+  background-color: #28a745;
+}
+
+/* HOVER NEXT */
+.next-button:hover {
+  background-color: gray;
+}
+
+/* TESTO RISULTATO */
+.result-screen p {
+  margin-bottom: 10px;
+}
+
+/* PUNTEGGIO FINALE */
+.score {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+/* PUNTEGGIO DA 3 A 5 */
+.score-good {
+  background-color: #eef9f0;
+  border: 2px solid #28a745;
+  color: #28a745;
+}
+
+/* PUNTEGGIO DA 0 A 2 */
+.score-bad {
+  background-color: #fdecec;
+  border: 2px solid #dc3545;
+  color: #dc3545;
+}
+
+/* ELENCO DEI RISULTATI */
+.results-list {
+  margin-top: 25px;
+  text-align: left;
+}
