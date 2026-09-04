@@ -1,0 +1,18 @@
+<!-- SINGOLO RISULTATO DEL QUIZ -->
+<div class="result-item">
+  <!-- Numero e testo della domanda -->
+  <h4>{{ questionNumber() }}. {{ result().question }}</h4>
+
+  <!-- Risposta scelta dall'utente -->
+  <p>Your answer: {{ result().selectedAnswer }}</p>
+
+  <!-- Risposta corretta -->
+  <p>Correct answer: {{ result().correctAnswer }}</p>
+
+  <!-- Mostro se la risposta è corretta oppure sbagliata -->
+  @if (result().correct) {
+    <p class="correct-result">Correct</p>
+  } @else {
+    <p class="wrong-result">Wrong</p>
+  }
+</div>
