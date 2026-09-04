@@ -1,0 +1,88 @@
+<!-- CONTENITORE PRINCIPALE DEL QUIZ -->
+<div class="quiz-container">
+  <!-- FASE 1 - SCHERMATA INIZIALE -->
+  <!-- Mostro questa sezione solo se il quiz non è ancora iniziato -->
+  @if (!quizStarted()) {
+    <section class="start-screen">
+      <h1>Quiz App</h1>
+      <p>Test your knowledge with a short multiple-choice quiz.</p>
+      <p>Total questions: {{ questions.length }}</p>
+
+      <!-- Quando clicco viene richiamato il metodo startQuiz() -->
+      <button type="button" (click)="startQuiz()">Start Quiz</button>
+    </section>
+  }
+
+  <!-- FASE 2 - QUIZ -->
+  <!-- Mostro il quiz solo se è iniziato e non è ancora terminato -->
+  @if (quizStarted() && !quizFinished()) {
+    <section class="quiz-screen">
+      <!-- Numero della domanda corrente. Aggiungo 1 perché currentIndex parte da 0 -->
+      <p>Question {{ currentIndex() + 1 }} of {{ questions.length }}</p>
+
+      <!-- CARD CHE CONTIENE LA DOMANDA -->
+      <div class="question-card">
+        <!-- Mostro il testo della domanda corrente -->
+        <h2>{{ currentQuestion().question }}</h2>
+
+        <!-- CONTENITORE DELLE POSSIBILI RISPOSTE -->
+        <div class="answers">
+          <!-- Con @for scorro tutte le risposte della domanda corrente. Uso track $index per identificare ogni risposta tramite la sua posizione nell'array ed evitare il warning di Angular.
+          -->
+          @for (answer of currentQuestion().answers; track $index) {
+            <!-- Quando clicco richiamo selectAnswer() e passo la risposta scelta. La classe correct evidenzia in verde la risposta corretta. La classe wrong evidenzia in rosso la risposta scelta se è sbagliata.-->
+            <button
+              type="button"
+              (click)="selectAnswer(answer)"
+              [class.correct]="
+                selectedAnswer() !== '' && answer === currentQuestion().correctAnswer
+              "
+              [class.wrong]="
+                selectedAnswer() === answer && answer !== currentQuestion().correctAnswer
+              "
+            >
+              <!-- Testo della risposta -->
+              {{ answer }}
+            </button>
+          }
+        </div>
+
+        <!-- Mostro il pulsante Next solo dopo che l'utente ha selezionato una risposta -->
+        @if (selectedAnswer() !== '') {
+          <button type="button" class="next-button" (click)="nextQuestion()">Next</button>
+        }
+      </div>
+    </section>
+  }
+
+  <!-- FASE 3 - RISULTATO FINALE -->
+  <!-- Mostro questa sezione quando il quiz è terminato -->
+  @if (quizFinished()) {
+    <section class="result-screen">
+      <!-- Titolo della schermata finale -->
+      <h2>Quiz completed!</h2>
+
+      <p>Your score is:</p>
+
+      <!-- Mostro il punteggio finale. Da 3 a 5 applico la classe score-good e il punteggio diventa verde. Da 0 a 2 applico la classe score-bad e il punteggio diventa rosso.
+      -->
+      <p class="score" [class.score-good]="score() >= 3" [class.score-bad]="score() < 3">
+        {{ score() }} / {{ questions.length }}
+      </p>
+
+      <!-- TITOLO DEL RIEPILOGO -->
+      <h3>Results</h3>
+
+      <!-- CONTENITORE DI TUTTI I RISULTATI -->
+      <div class="results-list">
+        <!-- Con @for scorro tutti i risultati salvati durante il quiz. Uso track $index per identificare ogni risultato tramite la sua posizione. Passo al componente figlio il risultato e il numero della domanda. -->
+        @for (result of results(); track $index) {
+          <app-quiz-result-item
+            [result]="result"
+            [questionNumber]="$index + 1"
+          ></app-quiz-result-item>
+        }
+      </div>
+    </section>
+  }
+</div>
